@@ -5,7 +5,7 @@ pipeline {
             steps {
                 withDockerContainer('openjdk:11') {
                     sh 'ls'
-                    sh 'chmod 888 gradlew'
+                    sh 'chmod 777 gradlew'
                     sh './gradlew clean build'
                 }
             }
