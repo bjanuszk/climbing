@@ -2,8 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            withDockerContainer('openjdk:11') {
-                sh 'gradlew clean build'
+            steps {
+                withDockerContainer('openjdk:11') {
+                    sh 'gradlew clean build'
+                }
             }
         }
     }
