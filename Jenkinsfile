@@ -6,7 +6,7 @@ pipeline {
                 withDockerContainer('openjdk:11') {
                     sh 'ls'
                     sh 'pwd'
-                    sh 'gradlew clean build'
+                    sh './gradlew clean build'
                 }
             }
         }
