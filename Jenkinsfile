@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 withDockerContainer('terraformers/docker-tnz:latest') {
-                    echo 'building'
+                    sh 'terraform version'
                 }
             }
         }
