@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withDockerContainer('terraformers/docker-tnz:latest') {
+                withDockerContainer('7factor/terraform-resource:latest') {
                     sh 'terraform version'
                 }
             }
