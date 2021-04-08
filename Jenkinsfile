@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withDockerContainer('openjdk:11') {
+                withDockerContainer('hashicorp/terraform') {
                     echo 'building'
                 }
             }
