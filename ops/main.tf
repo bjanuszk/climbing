@@ -1,5 +1,5 @@
 provider "local" {}
 resource "local_file" "myFile" {
-  content     = "a"
+  content     = "ab"
   filename = "${path.module}/myfile.txt"
 }
