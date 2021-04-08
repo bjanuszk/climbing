@@ -8,6 +8,7 @@ pipeline {
                     dir("ops") {
                         sh 'terraform init'
                         sh 'terraform plan'
+                        sh 'cat ${TERRAFORM_APPROVERS}'
                     }
                     timeout(time:30, unit:'SECONDS') {
                         input message:'Approve deployment?'
