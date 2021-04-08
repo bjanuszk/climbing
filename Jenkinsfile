@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withDockerContainer('terraformdocker/terraform:latest') {
+                withDockerContainer('terraformers/docker-tnz:latest') {
                     echo 'building'
                 }
             }
