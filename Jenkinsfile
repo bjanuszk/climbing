@@ -11,7 +11,7 @@ pipeline {
                     }
 
                     dir("ops") {
-                        sh 'terraform apply'
+                        sh 'terraform apply -auto-approve'
                     }
                 }
             }
