@@ -9,6 +9,10 @@ pipeline {
                         sh 'terraform init'
                         sh 'terraform plan'
                     }
+
+                    dir("ops") {
+                        sh 'terraform apply'
+                    }
                 }
             }
         }
