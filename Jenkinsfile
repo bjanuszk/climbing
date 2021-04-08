@@ -12,6 +12,7 @@ pipeline {
 
                     dir("ops") {
                         sh 'terraform apply -auto-approve'
+                        sh 'cat ./myfile.txt'
                     }
                 }
             }
