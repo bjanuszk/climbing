@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withDockerContainer('hashicorp/terraform:light') {
+                withDockerContainer('terraformdocker/terraform:latest') {
                     echo 'building'
                 }
             }
