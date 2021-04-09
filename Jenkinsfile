@@ -11,7 +11,7 @@ pipeline {
                         sh 'echo ${TERRAFORM_APPROVERS}'
                     }
                     timeout(time:30, unit:'SECONDS') {
-                        input message:'Approve deployment?'
+                        input message:'Approve deployment?', submitter: ${TERRAFORM_APPROVERS}
                     }
                     dir("ops") {
                         sh 'terraform apply -auto-approve'
