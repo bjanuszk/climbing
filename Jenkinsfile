@@ -10,7 +10,7 @@ pipeline {
                         sh 'terraform plan'
                     }
                     timeout(time:30, unit:'SECONDS') {
-                        sh 'echo ${TERRAFORM_APPROVERS}'
+                        sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
                         input message:'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
                     }
                     dir("ops") {
