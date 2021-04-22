@@ -7,7 +7,7 @@ pipeline {
                     sh 'terraform version'
                     dir("ops") {
                         sh 'terraform init'
-                        sh 'terraform plan -no-color'
+                        sh 'terraform plan -no-color; echo $?'
                         sh 'echo $?'
                     }
                     timeout(time:30, unit:'SECONDS') {
