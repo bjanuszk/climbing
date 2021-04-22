@@ -7,8 +7,7 @@ pipeline {
                     sh 'terraform version'
                     dir("ops") {
                         sh 'terraform init'
-                        sh 'terraform plan -no-color; echo $?'
-                        sh 'echo $?'
+                        sh 'terraform plan -no-color;test_exit_code=$?; echo $test_exit_code'
                     }
                     timeout(time:30, unit:'SECONDS') {
                         sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
