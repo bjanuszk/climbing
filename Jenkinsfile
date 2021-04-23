@@ -11,19 +11,21 @@ pipeline {
                         sh 'terraform version'
                         dir("ops") {
                             sh 'terraform init'
-                            sh 'printenv'
-                            sh 'terraform plan -no-color -detailed-exitcode && echo "No changes $?" || (echo "Changes detected $?" && export INFRA_CHANGES_DETECTED2="true")'
-                            sh 'echo XXXXXXXXXXX'
-                            env.INFRA_CHANGES_DETECTED = sh(returnStatus: true, script: "terraform plan -no-color -detailed-exitcode")
+                            env.TERRAFORM_PLAN_EXIT_CODE = sh(returnStatus: true, script: "terraform plan -no-color -detailed-exitcode")
                             sh 'printenv'
                         }
-                        timeout(time: 30, unit: 'SECONDS') {
-                            sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
-                            input message: 'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
-                        }
-                        dir("ops") {
-                            sh 'terraform apply -auto-approve'
-                            sh 'cat ./myfile.txt'
+
+                        if (env.TERRAFORM_PLAN_EXIT_CODE == '2') {
+                            timeout(time: 30, unit: 'SECONDS') {
+                                sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
+                                input message: 'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
+                            }
+                            dir("ops") {
+                                sh 'terraform apply -auto-approve'
+                                sh 'cat ./myfile.txt'
+                            }
+                        } else if (env.TERRAFORM_PLAN_EXIT_CODE == '0') {
+                            sh 'echo "There are no infrastructure changes"'
                         }
                     }
                 }
