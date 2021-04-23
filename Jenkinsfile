@@ -7,11 +7,14 @@ pipeline {
                     sh 'terraform version'
                     dir("ops") {
                         sh 'terraform init'
-                        sh 'terraform plan -no-color -detailed-exitcode; echo $?'
+                        sh '''
+                              terraform plan -no-color -detailed-exitcode
+                              echo $?
+                        '''
                     }
-                    timeout(time:30, unit:'SECONDS') {
+                    timeout(time: 30, unit: 'SECONDS') {
                         sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
-                        input message:'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
+                        input message: 'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
                     }
                     dir("ops") {
                         sh 'terraform apply -auto-approve'
