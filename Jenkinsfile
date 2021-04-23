@@ -13,7 +13,7 @@ pipeline {
                             sh 'terraform init'
                             env.INFRA_CHANGES_DETECTED = "abc"
                             sh 'printenv'
-                            sh 'terraform plan -no-color -detailed-exitcode && echo "No changes $?" || (echo "Changes detected $?" && export INFRA_CHANGES_DETECTED="true")'
+                            sh 'terraform plan -no-color -detailed-exitcode && echo "No changes $?" || (echo "Changes detected $?" && export INFRA_CHANGES_DETECTED2="true")'
                             sh 'printenv'
                         }
                         timeout(time: 30, unit: 'SECONDS') {
