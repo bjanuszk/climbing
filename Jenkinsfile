@@ -14,7 +14,7 @@ pipeline {
                             sh 'printenv'
                             sh 'terraform plan -no-color -detailed-exitcode && echo "No changes $?" || (echo "Changes detected $?" && export INFRA_CHANGES_DETECTED2="true")'
                             sh 'echo XXXXXXXXXXX'
-                            env.INFRA_CHANGES_DETECTED = "${terraform plan -no-color -detailed-exitcode}"
+                            env.INFRA_CHANGES_DETECTED = sh(script: "terraform plan -no-color -detailed-exitcode")
                             sh 'printenv'
                         }
                         timeout(time: 30, unit: 'SECONDS') {
