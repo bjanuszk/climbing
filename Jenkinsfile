@@ -20,10 +20,17 @@ pipeline {
                                 sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
                                 input message: 'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
                             }
-                            dir("ops") {
-                                sh 'terraform apply -auto-approve'
-                                sh 'cat ./myfile.txt'
+                            try {
+                                dir("ops") {
+                                    sh 'terraform xxxapply -auto-approve'
+                                    sh 'cat ./myfile.txt'
+                                }
                             }
+                            catch (e){
+                                sh 'echo dupa ${e}'
+                                throw e
+                            }
+
                         } else if (env.TERRAFORM_PLAN_EXIT_CODE == '0') {
                             sh 'echo "There are no infrastructure changes"'
                         }
