@@ -33,10 +33,10 @@ pipeline {
                         catch (e) {
                             emailext(
                                     recipientProviders: [developers(), requestor()],
-                                    subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                                    body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                                    subject: "FAILED: Reporting Service Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                                    body: """<p>FAILEDReporting Service: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-                                    to: "bjanuszkiewicz@objectivity.co.uk"
+                                    to: 'bartolo87@wp.pl'
                             )
                             throw e
                         }
