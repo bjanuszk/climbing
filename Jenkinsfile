@@ -36,7 +36,7 @@ pipeline {
                                     subject: "FAILED: Reporting Service Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                                     body: """<p>FAILEDReporting Service: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-                                    to: 'bartolo87@wp.pl'
+                                    to: 'januszkiewicz.bartosz@gmail.com'
                             )
                             throw e
                         }
