@@ -18,8 +18,14 @@ pipeline {
 //                            sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
 //                            input message: 'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
 //                        }
+                        timeout(time: 30, unit: 'SECONDS') {
+                            sh 'echo Users allowed to approve: ${TERRAFORM_APPROVERS}'
+                            input message: 'Approve deployment?', submitter: "${TERRAFORM_APPROVERS}"
+                        }
+
                         try {
                             dir("ops") {
+                                sh 'printenv'
                                 sh 'terraform apply -auto-approve'
                                 sh 'cat ./myfile.txt'
                             }
