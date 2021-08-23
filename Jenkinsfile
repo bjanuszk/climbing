@@ -10,7 +10,7 @@ pipeline {
                     script {
                         sh 'terraform version'
                         dir("ops") {
-                            sh 'terraform init'
+                            sh 'terraform init -no-color'
                             env.TERRAFORM_PLAN_EXIT_CODE = sh(returnStatus: true, script: "terraform plan -no-color -detailed-exitcode")
                             sh 'printenv'
                         }
