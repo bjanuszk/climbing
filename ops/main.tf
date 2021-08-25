@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 data "template_file" "policy" {
-  template = "${file("/policies/servicepolicy.json")}"
+  template = file("/policies/servicepolicy.json")
 }
 
 module "IAM" {
